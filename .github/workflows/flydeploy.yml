@@ -10,24 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code from the repo
+      # Usa la última versión de checkout
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 # Actualizado a la última versión estable
 
-      # Set up Node.js (change node-version if necessary)
+      # Usa la última versión de setup-node
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3 # Actualizado a la última versión estable
         with:
-          node-version: "20" # O la versión que necesites
+          node-version: "20" # Actualiza a Node.js 20, según las advertencias
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run tests
       - name: Run tests
         run: npm test
 
-      # Deploy to Fly.io
       - name: Deploy to Fly.io
         run: flyctl deploy
