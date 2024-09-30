@@ -1,0 +1,33 @@
+name: Deploy to Fly.io
+
+on:
+  push:
+    branches:
+      - CICD
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repo
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Node.js (change node-version if necessary)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14" # O la versión que necesites
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests
+      - name: Run tests
+        run: npm test
+
+      # Deploy to Fly.io
+      - name: Deploy to Fly.io
+        run: flyctl deploy
